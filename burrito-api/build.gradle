@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.apollographql.apollo'
+
+android {
+    compileSdkVersion 29
+    buildToolsVersion "29.0.2"
+
+
+    defaultConfig {
+        minSdkVersion 22
+        targetSdkVersion 29
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles 'consumer-rules.pro'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(":burrito-domain")
+
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.core:core-ktx:1.2.0'
+
+    implementation "com.apollographql.apollo:apollo-runtime:$apollo_version"
+    implementation "com.apollographql.apollo:apollo-rx2-support:$apollo_version"
+    implementation "com.apollographql.apollo:apollo-android-support:$apollo_version"
+
+    compileOnly("org.jetbrains:annotations:13.0")
+    testCompileOnly("org.jetbrains:annotations:13.0")
+
+    testImplementation 'junit:junit:4.12'
+
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+}
+
+apollo {
+    generateKotlinModels = true
+}
+
+
+/*
+    generate new schema ./gradlew :burrito-api:downloadApolloSchema -Pcom.apollographql.apollo.endpoint=https://api.yelp.com/v3/graphql -Pcom.apollographql.apollo.schema=src/main/java/com/graphlq/yelp/schema.json "-Pcom.apollographql.apollo.headers=Authorization=Bearer 3zO0wXxJYfm_M4hqGOHqUeg_TYImC7xgy2aKUYXg9nXh-3glWLcaZRBua5KrGTFimQihpxYVZ51AseCb4_ZMaShQJ70w8TF-qo0Qi1Spp0ojMcta2k39VcURKWOFXnYx"
+*/

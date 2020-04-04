@@ -1,0 +1,18 @@
+query SearchQuery($radius: Float!, $latitude: Float!, $longitude: Float!, $term:String!) {
+    search(term: $term, radius: $radius, latitude: $latitude,longitude: $longitude) {
+        total
+        business {
+            id
+            name
+            price
+            phone
+            location {
+                formatted_address
+            }
+            coordinates {
+                latitude
+                longitude
+            }
+        }
+    }
+}
