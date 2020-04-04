@@ -1,5 +1,4 @@
 <resources>
     <string name="app_name">burrito-api</string>
-    <string name="yelp_client_id">P49EoWYYF1vSjJ-JcHwnMA</string>
-    <string name="yelp_api_key">3zO0wXxJYfm_M4hqGOHqUeg_TYImC7xgy2aKUYXg9nXh-3glWLcaZRBua5KrGTFimQihpxYVZ51AseCb4_ZMaShQJ70w8TF-qo0Qi1Spp0ojMcta2k39VcURKWOFXnYx</string>
+    <string name="yelp_api_key">enter_your_key</string>
 </resources>
