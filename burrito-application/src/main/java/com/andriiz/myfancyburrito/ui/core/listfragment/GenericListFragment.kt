@@ -35,6 +35,7 @@ abstract class GenericListFragment<Entity> : BaseFragment() {
         recyclerView.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = groupAdapter
+            itemAnimator = null
         }
     }
 

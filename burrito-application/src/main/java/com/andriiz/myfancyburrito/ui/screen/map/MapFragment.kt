@@ -1,12 +1,14 @@
-package com.andriiz.myfancyburrito.ui.mapfragment
+package com.andriiz.myfancyburrito.ui.screen.map
 
 import android.os.Bundle
 import android.os.Parcelable
+import android.transition.TransitionInflater
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.airbnb.mvrx.MvRx
+import com.airbnb.mvrx.args
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.andriiz.domain.data.info
@@ -26,24 +28,44 @@ data class MapFragmentArgs(val id: String) : Parcelable
 
 class MapFragment : BaseFragment() {
 
+    private val args by args<MapFragmentArgs>()
+
     private val viewModel: MapViewModel by fragmentViewModel()
 
     private var mapView: MapView? = null
 
     private var googleMap: GoogleMap? = null
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedElementEnterTransition = TransitionInflater.from(context)
+            .inflateTransition(android.R.transition.move)
+    }
+
     override fun onCreateView(inflater: LayoutInflater, vg: ViewGroup?, bundle: Bundle?): View =
         inflater.inflate(R.layout.fragment_map, vg, false).apply {
             mapView = findViewById(R.id.mapView)
             mapView?.onCreate(bundle)
-            mapView?.getMapAsync {
-                googleMap = it
-                with(it.uiSettings){
-                    isScrollGesturesEnabled = false
-                    isZoomGesturesEnabled = false
-                }
+        }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        mapView?.getMapAsync {
+            googleMap = it
+            with(it.uiSettings) {
+                isScrollGesturesEnabled = false
+                isZoomGesturesEnabled = false
             }
         }
+
+        sharedElement.transitionName = args.id
+
+        mapView?.animate()
+            ?.setStartDelay(GOOD_DURATION_TIME)
+            ?.alpha(FULL_ALPHA)
+            ?.start()
+
+    }
 
     override fun onResume() {
         super.onResume()
@@ -88,7 +110,7 @@ class MapFragment : BaseFragment() {
             googleMap?.addMarker(MarkerOptions().apply { position(latLng) })
 
             setToolbarTitle(business.name)
-            businessTitle.text = business.address
+            businessAddress.text = business.address
             businessInfo.text = business.info
 
         }
@@ -99,13 +121,17 @@ class MapFragment : BaseFragment() {
 
         private const val BEST_ZOOM_VALUE = 16F
 
-        fun instance(id: String) : Fragment {
+        private const val GOOD_DURATION_TIME = 200L
+        private const val FULL_ALPHA = 1F
+
+        fun instance(id: String): Fragment {
             val fragment = MapFragment()
             fragment.arguments = Bundle().apply {
                 putParcelable(MvRx.KEY_ARG, MapFragmentArgs(id))
             }
             return fragment
         }
+
     }
 
 }

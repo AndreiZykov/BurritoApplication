@@ -1,7 +1,5 @@
-package com.andriiz.myfancyburrito.ui.businesslist
+package com.andriiz.myfancyburrito.ui.screen.businesslist
 
-import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import com.airbnb.mvrx.fragmentViewModel
 import com.andriiz.domain.data.Business
 import com.andriiz.myfancyburrito.R
@@ -19,19 +17,11 @@ class BusinessFragment : GenericListFragment<Business>() {
     override val viewModel: BusinessViewModel by fragmentViewModel()
 
     override val toListItem: (Business) -> Item<GroupieViewHolder>
-            = { BusinessListItem(it) { id -> mainActivity.goToMapFragment(id) } }
+            = { BusinessListItem(it) { id, sharedView -> mainActivity.goToMapFragment(id, sharedView) } }
 
     override fun onResume() {
         super.onResume()
         setToolbarTitle(getString(R.string.burrito_places))
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        (activity as? AppCompatActivity)?.let {
-            it.supportActionBar?.setDisplayHomeAsUpEnabled(false)
-            it.supportActionBar?.setDisplayHomeAsUpEnabled(false)
-        }
     }
 
     override fun onBackPressed(): Boolean = false

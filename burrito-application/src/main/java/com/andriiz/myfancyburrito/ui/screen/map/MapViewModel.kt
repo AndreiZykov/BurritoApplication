@@ -1,4 +1,4 @@
-package com.andriiz.myfancyburrito.ui.mapfragment
+package com.andriiz.myfancyburrito.ui.screen.map
 
 import arrow.core.extensions.list.foldable.find
 import arrow.core.k

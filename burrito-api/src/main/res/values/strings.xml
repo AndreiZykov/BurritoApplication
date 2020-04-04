@@ -1,4 +1,3 @@
 <resources>
     <string name="app_name">burrito-api</string>
-    <string name="yelp_api_key">enter_your_key</string>
 </resources>

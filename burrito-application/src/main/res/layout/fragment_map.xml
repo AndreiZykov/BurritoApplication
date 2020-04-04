@@ -18,11 +18,13 @@
         <com.google.android.gms.maps.MapView
             android:id="@+id/mapView"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:alpha="0"/>
 
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/sharedElement"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
@@ -31,21 +33,23 @@
         app:cardBackgroundColor="@color/burritoColor"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
             android:paddingTop="24dp"
-            android:paddingBottom="24dp">
+            android:paddingBottom="24dp"
+            android:background="#00ffffff"
+            >
 
             <TextView
-                android:id="@+id/businessTitle"
+                android:id="@+id/businessAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:lines="1"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="22sp" />
+                android:textSize="22sp"
+                app:layout_constraintTop_toTopOf="parent"/>
 
             <TextView
                 android:id="@+id/businessInfo"
@@ -55,10 +59,10 @@
                 android:lines="1"
                 android:textAlignment="center"
                 android:textColor="#FFFFFF"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:layout_constraintTop_toBottomOf="@+id/businessAddress"/>
 
-        </LinearLayout>
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
 

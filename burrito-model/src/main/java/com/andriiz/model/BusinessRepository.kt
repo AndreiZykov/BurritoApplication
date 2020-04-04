@@ -37,6 +37,7 @@ class BusinessRepository(
         .doOnSuccess { _onValueChanged.onNext(it) }
         .ignoreElement()
 
+
     private fun searchBurrito(location: Location): Single<Either<Error, List<Business>>> =
         yelpBusinessSearchService.search(term = HARDCODED_BURRITO_STRING, lat = location.latitude, lng =  location.longitude, radius = TWELVE_MILES_IN_METERS)
 

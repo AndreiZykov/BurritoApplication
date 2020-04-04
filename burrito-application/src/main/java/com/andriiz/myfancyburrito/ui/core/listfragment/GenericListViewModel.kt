@@ -27,8 +27,10 @@ abstract class GenericListViewModel<Entity>(
         genericDataSource.fetch()
             .doOnSubscribe { setState { copy(isLoading = list.isEmpty()) } }
             .doOnComplete { setState { copy(isLoading = false) } }
+            .doOnError(Timber::e)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
+            .onErrorComplete()
             .subscribe()
             .disposeOnClear()
     }
