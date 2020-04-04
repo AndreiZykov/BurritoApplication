@@ -3,4 +3,5 @@
     <string name="location_permission_not_granted">Location Permission Not Granted</string>
     <string name="location_request_failed">Location Request Failed</string>
     <string name="unknown_error">Unknown Error</string>
+    <string name="server_error">Sorry... Something Happened In The Clouds</string>
 </resources>

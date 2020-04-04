@@ -1,4 +1,4 @@
-package com.andriiz.myfancyburrito.ui.mapfragment
+package com.andriiz.myfancyburrito.ui.screen.map
 
 import com.airbnb.mvrx.MvRxState
 import com.andriiz.domain.data.Business

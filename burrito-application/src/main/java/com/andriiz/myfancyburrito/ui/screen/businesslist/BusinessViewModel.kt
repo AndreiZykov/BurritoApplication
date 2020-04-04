@@ -1,4 +1,4 @@
-package com.andriiz.myfancyburrito.ui.businesslist
+package com.andriiz.myfancyburrito.ui.screen.businesslist
 
 import com.airbnb.mvrx.MvRxViewModelFactory
 import com.airbnb.mvrx.ViewModelContext

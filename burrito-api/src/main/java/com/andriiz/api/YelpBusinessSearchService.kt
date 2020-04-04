@@ -1,11 +1,14 @@
 package com.andriiz.api
 
 import arrow.core.Either
+import arrow.core.left
 import arrow.core.right
 import com.andriiz.domain.data.Business
 import com.andriiz.domain.data.Error
+import com.andriiz.domain.data.Error.*
 import com.andriiz.domain.data.PhoneNumber
 import com.apollographql.apollo.ApolloClient
+import com.apollographql.apollo.exception.ApolloException
 import com.apollographql.apollo.rx2.rxQuery
 import com.yelp.SearchQuery
 import io.reactivex.Single
@@ -23,7 +26,13 @@ class YelpBusinessSearchService(apolloClientProvider: ApolloClientProvider) {
                     .filterNotNull()
                     .filter(filterBusinessObj)
                     .map(toBusinessObj)
-            }.map { it.right() }
+            }.map<Either<Error, List<Business>>> { it.right() }
+            .onErrorReturn {
+                when(it){
+                    is ApolloException -> SERVER_ERROR
+                    else               -> UNKNOWN_ERROR
+                }.left()
+            }
 
     private val filterBusinessObj: (SearchQuery.Business) -> Boolean = { item ->
         when {
