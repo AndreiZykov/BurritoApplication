@@ -8,5 +8,5 @@ import io.reactivex.Observable
 interface GenericDataSource<Entity> {
     val onValueChanged: Observable<Either<Error, List<Entity>>>
     val value: List<Entity>
-    fun fetch(page: Int = 0): Completable
+    fun fetch(): Completable
 }

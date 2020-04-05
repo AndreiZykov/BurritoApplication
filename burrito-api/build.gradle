@@ -40,13 +40,12 @@ dependencies {
     implementation "com.apollographql.apollo:apollo-rx2-support:$apollo_version"
     implementation "com.apollographql.apollo:apollo-android-support:$apollo_version"
 
+    testImplementation "junit:junit:$junit_version"
+
+    //noinspection GradleDependency
     compileOnly("org.jetbrains:annotations:13.0")
+    //noinspection GradleDependency
     testCompileOnly("org.jetbrains:annotations:13.0")
-
-    testImplementation 'junit:junit:4.12'
-
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 }
 
 apollo {

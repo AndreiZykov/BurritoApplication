@@ -12,7 +12,7 @@ import io.reactivex.Observable
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 
-class BusinessRepository(
+class BusinessRepository (
     private val yelpBusinessSearchService: YelpBusinessSearchService,
     private val locationProvider: LocationProvider
 ) : GenericDataSource<Business> {
@@ -29,14 +29,14 @@ class BusinessRepository(
                 businessesOrError.fold( ifLeft = { emptyList<Business>() }, ifRight = { it }) }
             .getOrElse { emptyList() }
 
-    override fun fetch(page: Int): Completable = locationProvider.get()
+    override fun fetch(): Completable = locationProvider.get()
         .map { locationOrError -> locationOrError.map(::searchBurrito) }
         .flatMap { it.getOrHandle { error -> Single.just(error.left()) } }
         .doOnSuccess { _onValueChanged.onNext(it) }
         .ignoreElement()
 
 
-    private fun searchBurrito(location: Location): Single<Either<Error, List<Business>>> =
+    private fun searchBurrito(location: Location): Single<Either<Error, List<Business>>>  =
         yelpBusinessSearchService.search(term = HARDCODED_BURRITO_STRING, lat = location.latitude, lng =  location.longitude, radius = TWELVE_MILES_IN_METERS)
 
     companion object {
