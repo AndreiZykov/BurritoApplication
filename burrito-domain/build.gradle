@@ -5,7 +5,7 @@ apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
-    buildToolsVersion "29.0.2"
+    buildToolsVersion "29.0.3"
 
 
     defaultConfig {
@@ -44,5 +44,5 @@ dependencies {
 
     api 'com.google.code.gson:gson:2.8.6'
 
-    testImplementation 'junit:junit:4.12'
+    testImplementation "junit:junit:$junit_version"
 }
