@@ -9,4 +9,4 @@ before start:
 enjoy :)
 
 
-![ScreenShot]https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_1.png
+![ScreenShot](https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_1.png)
