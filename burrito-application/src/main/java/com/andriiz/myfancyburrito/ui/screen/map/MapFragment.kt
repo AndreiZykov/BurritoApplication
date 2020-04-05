@@ -102,18 +102,18 @@ class MapFragment : BaseFragment() {
     override fun onBackPressed(): Boolean = false
 
     override fun invalidate() = withState(viewModel) { state ->
-        state.business?.let { business ->
+        state.business.fold(
+            ifEmpty = { /* (may be some other day) */ },
+            ifSome  = { business ->
+                val latLng = LatLng(business.lat, business.lng)
 
-            val latLng = LatLng(business.lat, business.lng)
+                googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, BEST_ZOOM_VALUE))
+                googleMap?.addMarker(MarkerOptions().apply { position(latLng) })
 
-            googleMap?.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, BEST_ZOOM_VALUE))
-            googleMap?.addMarker(MarkerOptions().apply { position(latLng) })
-
-            setToolbarTitle(business.name)
-            businessAddress.text = business.address
-            businessInfo.text = business.info
-
-        }
+                setToolbarTitle(business.name)
+                businessAddress.text = business.address
+                businessInfo.text = business.info
+            })
         return@withState
     }
 

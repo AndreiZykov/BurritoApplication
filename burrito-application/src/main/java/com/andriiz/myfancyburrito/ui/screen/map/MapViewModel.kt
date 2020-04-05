@@ -21,7 +21,7 @@ class MapViewModel(initialState: MapViewState) : MvRxViewModel<MapViewState>(ini
             val dataSource: GenericDataSource<Business> by viewModelContext.activity.inject()
             val args = viewModelContext.args<MapFragmentArgs>()
             val optionalBusiness = dataSource.value.k().find { it.id == args.id }
-            return MapViewState(optionalBusiness.orNull())
+            return MapViewState(optionalBusiness)
         }
 
     }

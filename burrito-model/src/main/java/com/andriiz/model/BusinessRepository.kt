@@ -1,10 +1,7 @@
 package com.andriiz.model
 
 import android.location.Location
-import arrow.core.Either
-import arrow.core.getOrHandle
-import arrow.core.left
-import arrow.core.right
+import arrow.core.*
 import com.andriiz.api.YelpBusinessSearchService
 import com.andriiz.domain.contract.GenericDataSource
 import com.andriiz.domain.contract.LocationProvider
@@ -27,9 +24,10 @@ class BusinessRepository(
         get() = _onValueChanged
 
     override val value: List<Business>
-        get() = _onValueChanged.value
-            ?.fold( ifLeft = { emptyList<Business>() }, ifRight = { it })
-            ?: emptyList()
+        get() = Option.fromNullable(_onValueChanged.value)
+            .map { businessesOrError ->
+                businessesOrError.fold( ifLeft = { emptyList<Business>() }, ifRight = { it }) }
+            .getOrElse { emptyList() }
 
     override fun fetch(page: Int): Completable = locationProvider.get()
         .map { locationOrError -> locationOrError.map(::searchBurrito) }
