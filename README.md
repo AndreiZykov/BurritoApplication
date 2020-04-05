@@ -7,6 +7,8 @@ before start:
 - enter yelp and google keys
 - enjoy :)
 
+<img src="https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_3.png"
+       width="500" />
 
 <div>
   <img src="https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_2.png"
