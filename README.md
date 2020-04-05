@@ -4,9 +4,9 @@
 
 before start:
 - run ./gradlew generateApolloSources
-- <span style="color:red;"> enter yelp and google keys </span>
+- enter yelp and google keys
+- enjoy :)
 
-enjoy :)
 
 <div>
   <img src="https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_2.png"
