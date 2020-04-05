@@ -8,6 +8,11 @@ before start:
 
 enjoy :)
 
-<img src="https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_1.png" width="100" />
+<div>
+  <img src="https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_2.png"
+       width="250" />
+  <img src="https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_1.png"
+       width="250" />
+</div>  
 
 
