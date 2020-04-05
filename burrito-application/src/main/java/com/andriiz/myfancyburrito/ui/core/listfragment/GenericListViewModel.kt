@@ -25,7 +25,7 @@ abstract class GenericListViewModel<Entity>(
 
     fun refresh() {
         genericDataSource.fetch()
-            .doOnSubscribe { setState { copy(isLoading = list.isEmpty()) } }
+            .doOnSubscribe { setState { copy(isLoading = true) } }
             .doOnComplete { setState { copy(isLoading = false) } }
             .doOnError(Timber::e)
             .subscribeOn(Schedulers.io())

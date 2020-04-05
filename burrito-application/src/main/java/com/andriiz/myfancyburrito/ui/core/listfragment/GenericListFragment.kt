@@ -37,6 +37,7 @@ abstract class GenericListFragment<Entity> : BaseFragment() {
             adapter = groupAdapter
             itemAnimator = null
         }
+        swipeToRefresh.setOnRefreshListener(viewModel::refresh)
     }
 
     override fun onStart() {
@@ -46,9 +47,11 @@ abstract class GenericListFragment<Entity> : BaseFragment() {
     
     override fun invalidate() = withState(viewModel) { state ->
 
+        if(!state.isLoading) swipeToRefresh.isRefreshing = false
+
         when {
             state.error.nonEmpty() -> listOf(ErrorListItem(getString(state.errorMessage())))
-            state.isLoading -> listOf(ProgressBarListItem())
+            state.isLoading && state.list.isEmpty() -> listOf(ProgressBarListItem())
             else -> state.list.map(toListItem)
                 .ifEmpty { listOf(ErrorListItem(emptyListMessage)) }
         }.let(groupAdapter::updateAsync)

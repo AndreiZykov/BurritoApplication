@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         loadKoinModules(managementActivityModule)
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
         showFragment(BusinessFragment(), BUSINESS_LIST_FRAGMENT_TAG)
     }
 
@@ -41,25 +40,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 1) finish()
-        val fragment =
-            (supportFragmentManager.findFragmentById(android.R.id.content) as? BaseFragment)
-        if (fragment?.onBackPressed() == true) return
-        super.onBackPressed()
+        if (supportFragmentManager.backStackEntryCount > 1) {
+            val fragment =
+                (supportFragmentManager.findFragmentById(android.R.id.content) as? BaseFragment)
+            if (fragment?.onBackPressed() != true) {
+                super.onBackPressed()
+            }
+        } else finish()
     }
 
     private fun showFragment(fragment: Fragment, tag: String, sharedView: View? = null) {
-        val existingFragment = supportFragmentManager.findFragmentByTag(tag)
-        if (existingFragment != null) {
-            val bt = supportFragmentManager.beginTransaction()
-            bt.show(existingFragment)
-            bt.commitNow()
-        } else {
-            val bt = supportFragmentManager.beginTransaction()
-            if(sharedView != null) bt.addSharedElement(sharedView, ViewCompat.getTransitionName(sharedView).orEmpty())
-            bt.replace(R.id.content, fragment, tag)
-            bt.addToBackStack(tag)
-            bt.commit()
+        if(supportFragmentManager.findFragmentByTag(tag) == null){
+            supportFragmentManager.beginTransaction().apply {
+                if(sharedView != null) addSharedElement(sharedView, ViewCompat.getTransitionName(sharedView).orEmpty())
+            }.replace(android.R.id.content, fragment, tag)
+                .addToBackStack(tag)
+                .commit()
         }
     }
 
