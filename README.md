@@ -4,7 +4,7 @@
 
 before start:
 - run ./gradlew generateApolloSources
-- enter yelp and google keys
+- <span style="color:red;"> enter yelp and google keys </span>
 
 enjoy :)
 
