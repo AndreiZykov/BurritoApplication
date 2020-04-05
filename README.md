@@ -8,5 +8,6 @@ before start:
 
 enjoy :)
 
+<img src="https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_1.png" width="100" />
 
-![ScreenShot](https://github.com/AndreiZykov/BurritoApplication/blob/master/screenshots/screenshot_1.png)
+
