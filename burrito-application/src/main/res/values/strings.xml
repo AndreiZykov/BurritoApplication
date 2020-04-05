@@ -8,5 +8,6 @@
     <string name="yelp_graphql_url">https://api.yelp.com/v3/graphql</string>
     <string name="empty_list">Empty List</string>
     <string name="burrito_places">Burrito Places</string>
-
+    <string name="pull_to_refresh">Pull to refresh.</string>
+    
 </resources>
